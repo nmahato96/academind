@@ -12,6 +12,8 @@ class UserController extends Controller
 	public function getDashboard(){
 		return view('dashboard');
 	}
+
+
 	
 	public function postSignUp(Request $request)
 	{
@@ -32,11 +34,18 @@ class UserController extends Controller
 		return redirect()->route('dashboard');
 	}
 
+
+
 	public function postSignIn(Request $request){
 		if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']])) {
 			return redirect()->route('dashboard');
 		}
 		return redirect()->back();
+	}
+
+	public function logout(){
+		Auth::logout();
+		return redirect()->route('home');
 	}
 }
 ?>
